@@ -23,5 +23,4 @@ function generic() {
     multiplyNumeric(image);
 
     module.exports = generic();
-
 }
