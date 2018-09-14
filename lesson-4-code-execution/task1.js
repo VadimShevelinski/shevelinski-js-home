@@ -1,14 +1,13 @@
 'use strict'
 
-let tasksCompleted = {
-    'Anna': 29,
-    'Serg': 35,
-    'Elena': 1,
-    'Anton': 99
-};
 
 function maxTask() {
-
+    let tasksCompleted = {
+        'Anna': 29,
+        'Serg': 35,
+        'Elena': 1,
+        'Anton': 99
+    };
     let max = 0;
     let maxName = "";
     for (let name in tasksCompleted) {
@@ -22,3 +21,4 @@ function maxTask() {
 };
 
 maxTask();
+module.exports = maxTask()
