@@ -104,5 +104,3 @@ if (sumJohn > sumMark) {
 else {
     alert(str2 + 'Mark');
 }
-
-module.exports = John;
