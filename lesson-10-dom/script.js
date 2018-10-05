@@ -31,7 +31,7 @@ var drinkStorage = new HashStorage;
 document.getElementById('sub_add').addEventListener('click',function input(){
     var name = document.getElementById("name").value;
     var svo = [document.getElementById('recepes').value];
-    var alko = undefined;
+    var alko = 0;
     document.getElementById("yes").onclick = function () {
         if(document.getElementById('yes').checked === true){
             alko = 'алкогольный'
