@@ -1,0 +1,18 @@
+form {
+  margin-top: 20px;
+}
+
+ input {
+  display: block;
+}
+
+ .info_block {
+   width: 300px;
+   height: max-content;
+   display: none;
+ }
+ .block {
+   width: 300px;
+   height: max-content;
+   display: block;
+ }
