@@ -1,18 +1,23 @@
 'use strict';
 
-let result = "\n";
-let quantity = 12;
-const black = '#';
-const white = " ";
-for (let row = 1; row <= quantity; row++) {
-    for (let cell = 1; cell <= quantity; cell++) {
-        if (row % 2 === cell % 2) {
-            result += black;
+function drawGrid(length) {
+    const gridSharp = '#';
+    const gridSpace = ' ';
+    const gridLineBreak = '\n';
+    let grid = '';
+    for (let n = 1; n <= length; n++) {
+        for (let i = 1; i <= length; i++) {
+            if ((n + i) % 2 === 0) {
+                grid += gridSharp;
+            }  else {
+                grid += gridSpace;
+            }
         }
-        else {
-            result += white;
-        }
+        grid += gridLineBreak;
     }
-    result += "\n";
+    console.log(grid);
 }
-console.log(result);
+
+drawGrid(26);
+drawGrid(11);
+
