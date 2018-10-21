@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=UTF-8>
+  <title>TENNIS_DOM</title>
+  <style>
+    * {margin: 0;}
+    #counter {
+      width: 600px;
+      background: lightblue;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      height: 30px;
+    }
+    input {
+      height: 100%;
+      width: 50px;
+      float: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    p {
+      display: inline-block;
+      width: 100px;
+      background-color: lightgreen;
+      font-size: 1.5em;
+      font-weight: bold;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<div id = "counter">
+  <input type = "button" value = "ПУСК!">
+  <p><span class="leftCount">0</span>:<span class="rightCount">0</span></p>
+</div>
+
+<script src="app.js"></script>
+<script src="play-game.js"></script>
+</body>
+</html>
