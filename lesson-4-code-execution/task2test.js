@@ -1,21 +1,17 @@
-exports.createUser = function (generic) {
-    return new User();
-}
-describe('multiplyNumeric', function() {
-    it('*=2', function() {
-        var image = {
-            width: 100,
-            height: 400,
-            title: 'Cool image'
-        };
-        let result = multiplyNumeric(image);
-        assert.equal(image.width, 80000);
-        assert.equal(image.height, 600);
-        assert.equal(image.title, 'Cool image');
-    });
+let multiplyNumeric = require('./task2');
 
-    it('returns nothing', function() {
-        assert.isUndefined( multiplyNumeric({}) );
-    });
+let image = {
+    width: 100,
+    height: 400,
+    title: 'Cool image'
+};
 
+let multiplyImage = {
+    width: 200,
+    height: 800,
+    title: 'Cool image'
+};
+
+test('positive test', () => {
+    expect(multiplyNumeric(image)).toEqual(multiplyImage);
 });

@@ -1,4 +1,12 @@
-const maxTask = require('task1.js');
-test('max Tasks', () => {
-    expect(maxTask(tasksCompleted)).toBe('Anton');
+let maxTasks = require('./task1');
+
+let tasksCompleted = {
+    'Anna': 29,
+    'Serg': 35,
+    'Elena': 112,
+    'Anton': 99
+};
+
+test('max Tasks for Elena', () => {
+    expect(maxTasks(tasksCompleted)).toBe('Elena');
 });

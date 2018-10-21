@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function generic() {
     let image = {
@@ -12,15 +12,15 @@ function generic() {
     }
 
     function multiplyNumeric(obj) {
-        for (var key in obj) {
+        for (let key in obj) {
             if (isNumeric(obj[key])) {
                 obj[key] *= 2;
             }
         }
-        return image
+        return image;
     }
 
     multiplyNumeric(image);
-
-    module.exports = generic();
 }
+
+module.exports = generic();
