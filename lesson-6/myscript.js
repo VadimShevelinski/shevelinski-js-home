@@ -1,106 +1,66 @@
-'use strict'
+'use strict';
 
-var sumJohn = 0;
-var sumMark = 0;
-var tipAverageJohn = 0;
-var tipSAverageMark = 0;
-var str = 'чаевых больше заплатил ';
-var str2 = 'больше любит покушать ';
-
-function John() {
-    var cashJohn = [124, 48, 268, 180, 42];
-    var tipJohn = [];
-    var xJohn = {};
-
-    for (var i = 0; i < cashJohn.length; i++) {
-        if (cashJohn[i] <= 50) {
-            tipJohn[i] = Math.ceil(cashJohn[i] * 0.20);
-            xJohn[cashJohn[i]] = tipJohn[i];
-            sumJohn += tipJohn[i];
-        }
-
-        if (cashJohn[i] > 50 && cashJohn[i] <= 200) {
-            tipJohn[i] = Math.ceil(cashJohn[i] * 0.15);
-            xJohn[cashJohn[i]] = tipJohn[i];
-            sumJohn += tipJohn[i];
-        }
-
-        if (cashJohn[i] > 200) {
-            tipJohn[i] = Math.ceil(cashJohn[i] * 0.10);
-            xJohn[cashJohn[i]] = tipJohn[i];
-            sumJohn += tipJohn[i];
-            sumJohn /= cashJohn.length;
-        }
-
-    }
-
-    function arraySum() {
-        var a = 0;
-        for (var i = 0; i < tipJohn.length; i++) {
-
-            tipAverageJohn = a += tipJohn[i];
-        }
-        tipAverageJohn /= tipJohn.length;
-    }
-
-    arraySum();
-}
-
-John();
-
-function mark() {
-
-    var cashMark = [77, 375, 110, 45];
-    var tipMark = [];
-    var x = {};
-
-    for (var i = 0; i < cashMark.length; i++) {
-        if (cashMark[i] <= 100) {
-            tipMark[i] = Math.ceil(cashMark[i] * 0.20);
-            x[cashMark[i]] = tipMark[i];
-            sumMark += tipMark[i];
-        }
-
-        if (cashMark[i] > 100 && cashMark[i] <= 300) {
-            tipMark[i] = Math.ceil(cashMark[i] * 0.10);
-            x[cashMark[i]] = tipMark[i];
-            sumMark += tipMark[i];
-
-        }
-
-        if (cashMark[i] > 300) {
-            tipMark[i] = Math.ceil(cashMark[i] * 0.25);
-            x[cashMark[i]] = tipMark[i];
-            sumMark += tipMark[i];
-            sumMark /= cashMark[i];
-
+var john = {
+    bills: [124, 48, 268, 180, 42],
+    tipCalculator: function () {
+        var percentage;
+        var self = this;
+        self.tips = [];
+        self.paidAmounts = [];
+        for (var i = 0; i < self.bills.length; i++) {
+            var bill = self.bills[i];
+            if (bill < 50) {
+                percentage = 0.2;
+            } else if (bill >= 50 && bill < 200) {
+                percentage = 0.15;
+            } else {
+                percentage = 0.1;
+            }
+            self.tips[i] = bill * percentage;
+            self.paidAmounts[i] = bill + self.tips[i];
         }
     }
+};
 
-    function arrSum() {
-        var b = 0;
-        for (var i = 0; i < tipMark.length; i++) {
-
-            tipSAverageMark = b += tipMark[i];
+var mark = {
+    bills: [77, 375, 110, 45],
+    tipCalculator: function () {
+        var percentage;
+        var self = this;
+        self.tips = [];
+        self.paidAmounts = [];
+        for (var i = 0; i < self.bills.length; i++) {
+            var bill = self.bills[i];
+            if (bill < 100) {
+                percentage = 0.2;
+            } else if (bill >= 100 && bill < 300) {
+                percentage = 0.10;
+            } else {
+                percentage = 0.25;
+            }
+            self.tips[i] = bill * percentage;
+            self.paidAmounts[i] = bill + self.tips[i];
         }
-        tipSAverageMark /= tipMark.length;
     }
+};
 
-    arrSum();
+john.tipCalculator();
+mark.tipCalculator();
+
+function calcAverageTip(name) {
+    var sumTips = 0;
+    var tips = name.tips;
+    for (var i = 0; i < tips.length; i++) {
+        sumTips += tips[i];
+    }
+    return sumTips / tips.length;
 }
 
-mark();
+var averageTipJohn = calcAverageTip(john);
+var averageTipMark = calcAverageTip(mark);
 
-if (tipAverageJohn > tipSAverageMark) {
-    alert(str + 'John');
-}
-else {
-    alert(str + 'Mark');
-}
+console.log((averageTipJohn > averageTipMark) ? averageTipJohn : averageTipMark);
 
-if (sumJohn > sumMark) {
-    alert(str2 + 'Jonh');
-}
-else {
-    alert(str2 + 'Mark');
-}
+module.exports.john = john;
+module.exports.mark = mark;
+module.exports.calcAverageTip = calcAverageTip;

@@ -1,33 +1,25 @@
-var task1 = require('./tack1sample');
+var task1 = require('./task1');
+var average = task1.calcAverageTip;
 var john = task1.john;
 var mark = task1.mark;
 
-describe('test john object', function () {
-    it('check processing of variables', function () {
-        expect(john.bills.length === john.tips.length).toBe(true);
-    });
-
-    it('check function', function () {
-        expect(john.tips[1]).toBe(john.bills[1] * 0.2);
-    });
-
-    it('check result', function () {
-        john.bills = [100, 200, 50, 10, 250];
-        john.calcTips();
-        expect(john.tips[1] === 30).toBe(true);
-    })
+describe('calcAverageTip', () => {
+    it('average (2 + 3 + 5 + 6) equally 4', () => {
+    var testTips = {tips: [2, 3, 5, 6]};
+    expect(average(testTips)).toBe(4);
+});
 });
 
-describe('test mark object', function () {
-    it('check processing of variables', function () {
-        expect(mark.bills.length === mark.tips.length).toBe(true);
-    });
+describe('method tipCalculator', () => {
+    it('mark\'s tips from bills [40, 200, 400] are equal [8, 20, 100]', () => {
+    mark.bills = [40, 200, 400];
+    mark.tipCalculator();
+    expect(mark.tips).toEqual([8, 20, 100]);
+});
 
-    it('check function', function () {
-        expect(mark.tips[1]).toBe(mark.bills[1] * 0.25);
-    });
-
-    it('check result', function () {
-        expect(mark.tips[1] === 100).toBe(true);
-    })
+it('john\'s tips from bills [40, 100, 300] are equal [8, 20, 100]', () => {
+    john.bills = [40, 100, 300];
+john.tipCalculator();
+expect(john.tips).toEqual([8, 15, 30]);
+});
 });
