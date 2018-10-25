@@ -8,31 +8,28 @@ let AreaH = {
     width: AreaWidth,
     height: AreaHeight
 };
-
 let LeftH = {
     width: PlayerWidth,
     height: PlayerHeight,
     speedY: Speed,
-    posY: 0,
+    posY: Tarea.offsetHeight / 2 - leftPlayer.offsetHeight / 2,
     posX: 0,
     Update: function () {
         leftPlayer.style.top = this.posY + "px";
         leftPlayer.style.left = this.posX + "px";
     }
 };
-
 let RightH = {
     width: PlayerWidth,
     height: PlayerHeight,
     speedY: Speed,
-    posY: 0,
+    posY: Tarea.offsetHeight / 2 - rightPlayer.offsetHeight / 2,
     posX: AreaWidth - PlayerWidth,
     Update: function () {
         rightPlayer.style.top = this.posY + "px";
         rightPlayer.style.left = this.posX + "px";
     }
 };
-
 let BallH = {
     width: BallDiam,
     height: BallDiam,
@@ -46,16 +43,7 @@ let BallH = {
     }
 };
 
-// генерация случайного числа
-function RandomNum() {
-    let scores = [-5, -4, -3, 3, 4, 5];
-    let rand = Math.floor(Math.random() * scores.length);
-    return scores[rand];
-}
-
 window.onload = StartGame;
-
-// таймер для всего процесса
 function StartGame() {
     setInterval(Game, 40);
     document.onkeydown = MovePl;
@@ -63,6 +51,11 @@ function StartGame() {
     butt.onclick = MoveBl;
 }
 
+function RandomNum() {
+    let scores = [-5, -4, -3, 3, 4, 5];
+    let rand = Math.floor(Math.random() * scores.length);
+    return scores[rand];
+}
 
 function MovePl(e) {
     e.preventDefault();
@@ -75,10 +68,10 @@ function MovePl(e) {
     else if (keyCode === 38) {
         RightH.speedY = -4;
     }
-    else if (e.metaKey || e.ctrlKey) {
+    else if (keyCode === 17) {
         LeftH.speedY = 4;
     }
-    else if (e.shiftKey) {
+    else if (keyCode === 16) {
         LeftH.speedY = -4;
     }
 }
@@ -102,7 +95,6 @@ function StopPl(e) {
     }
 }
 
-// движение мяча
 function MoveBl(e) {
     e.preventDefault();
     e = e || window.event;
@@ -110,24 +102,18 @@ function MoveBl(e) {
     BallH.speedX = RandomNum();
 }
 
-
 function Game() {
-// расставляем поле
     LeftH.Update();
     RightH.Update();
     BallH.Update();
-
-// движение ракеток
     RightH.posY += RightH.speedY;
     LeftH.posY += LeftH.speedY;
-
     if (RightH.posY >= AreaH.height - RightH.height) {
         RightH.posY = AreaH.height - RightH.height;
     }
     if (RightH.posY <= 0) {
         RightH.posY = 0;
     }
-
     if (LeftH.posY >= AreaH.height - LeftH.height) {
         LeftH.posY = AreaH.height - LeftH.height;
     }
@@ -135,70 +121,55 @@ function Game() {
         LeftH.posY = 0;
     }
 
-// движение мяча
     BallH.posX += BallH.speedX;
     BallH.posY += BallH.speedY;
-    // нижняя стенка
     if (BallH.posY + BallH.height > AreaH.height) {
         BallH.speedY = -BallH.speedY;
         BallH.posY = AreaH.height - BallH.height;
     }
-    // верхняя стенка
     if (BallH.posY < 0) {
         BallH.speedY = -BallH.speedY;
         BallH.posY = 0;
     }
 
-
-// столкновения мяча с ракеткой по Х
     let R_Dot = AreaH.width - (RightH.width + BallH.width);
     let L_Dot = LeftH.width;
-
-    // правая ракетка
     if (BallH.posX >= R_Dot && BallH.posY >= RightH.posY && BallH.posY <= RightH.posY + RightH.height) {
         soundClick();
         BallH.speedX = -BallH.speedX;
         BallH.posX = R_Dot;
 
     }
-    // левая ракетка
     else if (BallH.posX <= L_Dot && BallH.posY >= LeftH.posY && BallH.posY <= LeftH.posY + LeftH.height) {
         soundClick();
         BallH.speedX = -BallH.speedX;
         BallH.posX = L_Dot;
 
     }
-
     else if (BallH.posX + BallH.width >= AreaH.width && BallH.speedX !== 0 && BallH.speedY !== 0) {
         BallH.posX = AreaH.width - BallH.width;
         BallH.speedX = 0;
         BallH.speedY = 0;
-        // счет
         let num_playL = leftCount.innerHTML;
         num_playL = parseFloat(num_playL) + 1;
         leftCount.innerHTML = num_playL;
 
     }
-
     else if (BallH.posX <= 0 && BallH.speedX !== 0 && BallH.speedY !== 0) {
         BallH.posX = 0;
         BallH.speedX = 0;
         BallH.speedY = 0;
-        // счет
         let num_playR = rightCount.innerHTML;
         num_playR = parseFloat(num_playR) + 1;
         rightCount.innerHTML = num_playR;
     }
-
     butt.onclick = function () {
+        ball.style.display = 'block';
         BallH.posY = Tarea.offsetHeight / 2 - ball.offsetHeight / 2;
         BallH.posX = Tarea.offsetWidth / 2 - ball.offsetWidth / 2;
-
         BallH.speedY = RandomNum();
         BallH.speedX = RandomNum();
-        console.log(BallH.speedY + " " + BallH.speedX);
     }
-
 }
 
 function soundClick() {
