@@ -7,18 +7,20 @@ elem = Array.prototype.slice.call(elem);
 var DragImage = null;
 var DragShiftX;
 var DragShiftY;
+var imageSize = 200;//ширина и высота картинок, используеться для расчета стартового местоположения
 
-function posit() {
+function elemPosition() {//позиция картинок в начале
     for (var i = 0; i < elem.length; i++) {
         elem[i].style.position = 'absolute';
         elem[i].style.top = 150 + 'px';
-        elem[i].style.left = ((i + 1) * 200) + (i * 50) + 'px';
-        elem[i].style.width = 200 + 'px';
-        elem[i].style.height = 200 + 'px';
+        elem[i].style.left = ((i + 1) * imageSize) + (i * 50) + 'px';
+        elem[i].style.width = imageSize + 'px';
+        elem[i].style.height = imageSize + 'px';
+        elem[i].style.zIndex = 1;
     }
 }
 
-posit();
+elemPosition();
 
 badY.onmousedown = DragStart;
 
@@ -51,5 +53,4 @@ function DragStart(EO) {
         document.onmousemove = null;
         document.onmouseup = null;
     }
-
 }
