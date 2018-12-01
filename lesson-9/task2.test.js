@@ -3,9 +3,7 @@ var isPal = require('./task2');
 describe('check isPal function', function () {
 
     it('Anna is a palindrome', function () {
-        expect(isPal('Anna')).toBe(true)
-})
-    ;
+        expect(isPal('Anna')).toBe(true)});
 
     it('Оно но is a palindrome', function () {
         expect(isPal('Оно но')).toBe(true)

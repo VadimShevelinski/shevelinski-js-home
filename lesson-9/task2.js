@@ -1,17 +1,8 @@
 'use strict';
 
-function isPal(str) {
-    var strReverse = str.toLowerCase().replace (' ', '').split('').reverse().join('');
-    if (strReverse !== str.toLowerCase().replace(' ', '')) {
-        return false;
-    } else {
-        return true;
-    }
+function isPal(string) {
+    var arr = string ? string.split(' ').join('').toLowerCase().split('') : [];
+    var arrReversed = arr.slice().reverse();
+    return arr.join('') === arrReversed.join('');
 }
-console.log(isPal('Anna')); // true
-console.log(isPal('Оно но')); //true
-console.log(isPal('Вася')); //false
-console.log(isPal('12321')); //true
-console.log(isPal('123212')); //false
-
 module.exports = isPal;
