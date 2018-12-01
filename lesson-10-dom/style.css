@@ -1,18 +1,29 @@
-form {
-  margin-top: 20px;
+body {
+  background-color: lightgray;
+  text-align: center;
 }
 
- input {
-  display: block;
+section, form { width: 45%;
+  float: left;
+  margin: .5em;
 }
 
- .info_block {
-   width: 300px;
-   height: max-content;
-   display: none;
- }
- .block {
-   width: 300px;
-   height: max-content;
-   display: block;
- }
+div {font-weight: bold;
+  background-color: white;
+  height: 15em;
+  border: 2px solid lightgreen;
+}
+
+input[type="text"],
+input[type="button"] {
+  width: 100%;
+  height: 2.5em;
+  margin: .5em auto;
+}
+
+input[type="button"] {
+  background-color: lightgreen;
+  text-transform: uppercase;
+  font-weight: bold;
+
+}

@@ -1,48 +1,32 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
-  <title>Title</title>
+  <title>DrinkStorage</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="TLocalStorage.js"></script>
+  <script src="DrinkStorage.js"></script>
 </head>
 <body>
-<div>
-  <form id="add_value">
-    <div id="input_panel">
-      <input type="text" size="30" value="введите название напитка" id="name">
-      <input type="text" size="30" value="введите рецепт напитка" id="recepes">
-      <p><b>Является ли напиток алкогольным?</b></p>
-      <p><input type="radio" value="nedzen" id="yes">Да</p>
-      <p><input type="radio" value="dzen" id="no"> Нет</p>
-    </div>
-    <input type="submit" value="Готово" id="sub_add">
-  </form>
+  <h1>Карта напитков бара</h1>
+  <form>
+    <label for="getKeys">Имеющиеся напитки:</label>
+    <input type="button" id="getKeys" value="Перечень всех напитков" onclick='GetInfoKeys()'>
 
-  <form id="get_value">
-    <input id="get_info" type="text" size="30" value="получение информации о напитке">
-    <input id="get" type="submit" value="Получить">
+    <label for="putInformation">Хотите добавить в меню новый напиток?</label>
+    <input type="button" id="putInformation" value="Добавить напиток" onclick='PutInfo()'>
+    <br>
+    <label for="getInformation">Получение информации о напитке:</label>
+    <input type="text" id="getInformation" value="" required>
+    <input type="button" value="Узнать о напитке" onclick='GetInfo()'>
+    <br>
+    <label for="deleteInformation">Удаление информации о напитке:</label>
+    <input type="text" id="deleteInformation" value="" required>
+    <input type="button" value="Удалить напиток" onclick='DelInfo()'>
   </form>
-  <div class="info_block" id="1">
-    <p id="text"></p>
-  </div>
-
-  <form >
-    <input id="deleteValue" type="text" size="30" value="удаление информации о напитке">
-    <input id="sub_del" type="submit" value="Удалить">
-  </form>
-
-  <div class="info_block" id="2">
-    <p id="text2"></p>
-  </div>
-
-  <form id="get_keys">
-    <p>перечень всех напитков</p>
-    <input id="showList" type="submit" value="Показать список">
-  </form>
-  <div class="info_block" id="3">
-    <p id="txt3"></p>
-  </div>
-</div>
-<script src="script.js"></script>
+  <section>
+    <p>Результат запроса:</p>
+    <div id = "messageId"></div>
+  </section>
 </body>
 </html>
