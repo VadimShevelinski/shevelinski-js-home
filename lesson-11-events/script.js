@@ -1,5 +1,5 @@
 (function () {
-    var all_Form = [
+    var forms = [
         {label: "Разработчики:", type: "text", name: "razrab", width: 450},
         {label: "Название сайта:", type: "text", name: "sait", width: 450},
         {label: "URL сайта:", type: "url", name: "url-site", width: 300},
@@ -22,12 +22,10 @@
 
     function makeForm(arr, id_n) {
         var form = document.forms[id_n];
-
         var field = document.createElement("fieldset");
         field.style.border = '0';
 
-
-// цикл создания формы
+        // цикл создания формы
         for (var i = 0; i < arr.length; i++) {
             var br = document.createElement('br');
 
@@ -42,7 +40,7 @@
             }
 
             // создание лэйбла
-            if ('label' in arr[i] === true) {
+            if ('label' in arr[i]) {
                 var lab = document.createElement('label');
                 var Ltext = document.createTextNode(arr[i].label);
                 lab.appendChild(Ltext);
@@ -52,27 +50,25 @@
                 field.appendChild(lab);
             }
 
-            // условие для radio
-            if (arr[i].type === "radio") {
-                // создание радиокнопок
+            function radioUpdate(){
                 for (var k = 0; k < arr[i].items.length; k++) {
                     var Elem = document.createElement('input');
                     Elem.type = arr[i].type;
                     var text_radio = document.createTextNode(arr[i].items[k]);
-
                     field.appendChild(Elem);
                     field.appendChild(text_radio);
                     field.appendChild(br);
                 }
+            }
 
-                // условие для checkbox
-            } else if (arr[i].type === "checkbox") {
+            function checkboxUpdate(){
                 var Elem = document.createElement('input');
                 Elem.type = arr[i].type;
                 Elem.checked = true;
                 makeElem();
-                // условие для select
-            } else if (arr[i].type === "select") {
+            }
+
+            function selectUpdate() {
                 var Elem = document.createElement('select');
                 // создание списка
                 for (var k = 0; k < arr[i].options.length; k++) {
@@ -82,28 +78,54 @@
                     option.appendChild(options);
                     Elem.appendChild(option);
                 }
-                makeElem()
-                // условие для textarea
-            } else if (arr[i].type === "textarea") {
+                makeElem();
+            }
+
+            function textareaUpdate() {
                 var Elem = document.createElement('textarea');
                 Elem.rows = 10;
                 Elem.style.display = "block";
-                makeElem()
-                // условие для textarea
-            } else if (arr[i].type === "submit") {
+                makeElem();
+            }
+
+            function submitUpdate() {
                 var Elem = document.createElement('input');
                 Elem.type = arr[i].type;
                 Elem.value = arr[i].value;
                 makeElem();
-
-            } else {
-                var Elem = document.createElement('input');
-                Elem.type = arr[i].type;
-                makeElem();
             }
+
+            switch (arr[i].type){
+                case "radio":
+                    radioUpdate();
+                 break;
+
+                case "checkbox":
+                    checkboxUpdate();
+                 break;
+                 
+                case "select":
+                   selectUpdate();
+                 break;
+
+                case "textarea":
+                    textareaUpdate();
+                 break;
+
+                case "submit":
+                    submitUpdate();
+                 break;
+
+                default:
+                    var Elem = document.createElement('input');
+                    Elem.type = arr[i].type;
+                    makeElem();
+                    break;
+            }
+
         }
         form.appendChild(field);
     }
 
-    makeForm(all_Form, "dyn_form");
+    makeForm(forms, "dyn_form");
 })();
