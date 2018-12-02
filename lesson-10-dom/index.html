@@ -1,0 +1,32 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DrinkStorage</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="TLocalStorage.js"></script>
+  <script src="DrinkStorage.js"></script>
+</head>
+<body>
+  <h1>Карта напитков бара</h1>
+  <form>
+    <label for="getKeys">Имеющиеся напитки:</label>
+    <input type="button" id="getKeys" value="Перечень всех напитков" onclick='GetInfoKeys()'>
+
+    <label for="putInformation">Хотите добавить в меню новый напиток?</label>
+    <input type="button" id="putInformation" value="Добавить напиток" onclick='PutInfo()'>
+    <br>
+    <label for="getInformation">Получение информации о напитке:</label>
+    <input type="text" id="getInformation" value="" required>
+    <input type="button" value="Узнать о напитке" onclick='GetInfo()'>
+    <br>
+    <label for="deleteInformation">Удаление информации о напитке:</label>
+    <input type="text" id="deleteInformation" value="" required>
+    <input type="button" value="Удалить напиток" onclick='DelInfo()'>
+  </form>
+  <section>
+    <p>Результат запроса:</p>
+    <div id = "messageId"></div>
+  </section>
+</body>
+</html>
